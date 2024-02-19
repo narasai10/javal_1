@@ -1,8 +1,1 @@
-option = 3
 
-se option==1:
-	->("é 1")
-entao_se option==2:
-	->("é 2")
-casoContrario:
-	->("Não é 1 nem 2!")
