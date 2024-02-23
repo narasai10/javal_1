@@ -52,10 +52,9 @@ while True:
         
     if event == 'exec':
         try:
-            os.system(f"start cmd /k py {def_file}.py")
-            os.system('cls')
-        except SyntaxError:
-           sg.popup_error_with_traceback("Erro na execução :(", "Corrija essa parada ai...")
+            os.system(f"start cmd /k python -c {def_file}")
+        except:
+           sg.popup_error("Houve um erro!", title="Erro!")
         
         #exec(open("execute.py").read())
 
@@ -64,8 +63,8 @@ while True:
         window['Selecionar!'].update(button_color='green')
 
         try:
-            with open(f"{def_file}.txt", 'r'):
-                pass  # Se abrir o arquivo com sucesso, significa que ele existe
+            with open(f"{def_file}.txt", 'r', encoding="utf-8"):
+                pass
             file_exists = True
         except FileNotFoundError:
             file_exists = False
@@ -73,17 +72,18 @@ while True:
         if file_exists == False:
             window['text'].update(value="Criando arquivos, aguarde!!")
             time.sleep(2)
-            with open(f"{def_file}.txt", 'w') as file:
+            with open(f"{def_file}.txt", 'w', encoding="utf-8") as file:
               file.write("")
-              with open(f"{def_file}.py", 'w') as fyp:
+              with open(f"{def_file}.py", 'w', encoding="utf-8") as fyp:
                  fyp.write("")
             window['text'].update(value="Arquivos criados, finalizando configurações...")
             time.sleep(3)
-            window['text'].update(value=open(f"{def_file}.txt").read())
+            window['text'].update(value=open(f"{def_file}.txt", encoding="utf-8").read())
         else:
             window['text'].update(value="Arquivo encontrado! Carregando código...")
             time.sleep(5)
-            window['text'].update(value=open(f"{def_file}.txt").read())
+            window['text'].update(value=open(f"{def_file}.txt", encoding="utf-8").read())
            
+
 
 window.close()
